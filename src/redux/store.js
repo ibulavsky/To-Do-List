@@ -1,11 +1,11 @@
 import {combineReducers, createStore} from "redux";
-import todoListReducer from "./todolistReducer";
+import addListsReducer from "../modules/addListsForm/bll/addListsReducer";
 
 
 // пока у меня будет один редьюсер,
 // но оставляю возможность для расширения
 let reducers = combineReducers({
-    todoLists: todoListReducer,
+    addListsForm: addListsReducer,
 });
 
 let store = createStore(reducers);

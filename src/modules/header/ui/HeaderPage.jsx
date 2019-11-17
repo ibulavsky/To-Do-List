@@ -1,8 +1,8 @@
 import React from "react";
-import HeaderPage from "./pure_components/Header"
-import AddFormContainer from "../../add_form/ui/AddFormContainer"
+import AddFormContainer from "../../addListsForm/ui/AddListsFormContainer"
+import {PageHeader} from "antd"
 
-const HeaderPageContainer = () => {
+const HeaderPage = () => {
 
     const stylesAnt = {
         border: '1px solid rgb(235, 237, 240)',
@@ -15,7 +15,7 @@ const HeaderPageContainer = () => {
 
     return (
         <>
-            <HeaderPage style={stylesAnt}
+            <PageHeader style={stylesAnt}
                         title={'My wish lists'}
                         subTitle={'What are you wanna from Santa?'}
                         {...config}/>
@@ -23,4 +23,4 @@ const HeaderPageContainer = () => {
     )
 }
 
-export default HeaderPageContainer
+export default HeaderPage

@@ -1,12 +1,14 @@
 import React from "react";
-import HeaderPageContainer from "./header/ui/HeaderPageContainer"
+import HeaderPage from "./header/ui/HeaderPage"
 import {Layout} from "antd"
+import WishesListsDisplay from "./listsContent/wishesListsDisplay"
 
 const Main = () => {
     return (
         <>
             <Layout>
-                <HeaderPageContainer/>
+                <HeaderPage/>
+                <WishesListsDisplay/>
             </Layout>
         </>
     )
