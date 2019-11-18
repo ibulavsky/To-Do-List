@@ -1,5 +1,5 @@
 import React from "react";
-import AddFormContainer from "../../addListsForm/ui/AddListsFormContainer"
+import AddFormContainer from "./addListsForm/AddListsFormContainer"
 import {PageHeader} from "antd"
 
 const HeaderPage = () => {

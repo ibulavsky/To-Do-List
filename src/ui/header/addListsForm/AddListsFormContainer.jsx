@@ -1,7 +1,7 @@
 import React, {Component} from "react"
-import AddForm from "../../common/add_form/ui/AddForm"
+import AddForm from "../../common/AddForm"
 import {connect} from "react-redux"
-import {addWishesList} from "../bll/addListsReducer"
+import {addWishesList} from "../../../bll/ListsReducer"
 
 class AddListsFormContainer extends Component {
 
@@ -13,9 +13,9 @@ class AddListsFormContainer extends Component {
         addItem: () => {
             const newWishList = {
                 name: this.state.itemName,
-                wishes: ['some', 'paw'],
+                wishes: [{title: 'added', priority: 2, id: 2 }],
                 id: Math.ceil(Math.random() * 10)
-            };
+            }
             this.props.addWishesList(newWishList)
         },
         changeItemName: (e) => {
@@ -30,7 +30,7 @@ class AddListsFormContainer extends Component {
     render() {
         return (
             <>
-                <AddForm itemName={this.state.itemName} {...this.addFormCallbacks} />
+                <AddForm item={'list'} itemName={this.state.itemName} {...this.addFormCallbacks} />
             </>
         )
     }

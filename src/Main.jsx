@@ -1,7 +1,7 @@
 import React from "react";
-import HeaderPage from "./header/ui/HeaderPage"
+import HeaderPage from "./ui/header/HeaderPage"
 import {Layout} from "antd"
-import WishesListsDisplay from "./listsContent/wishesListsDisplay"
+import WishesListsDisplay from "./ui/listsContent/WishesListsDisplay"
 
 const Main = () => {
     return (
