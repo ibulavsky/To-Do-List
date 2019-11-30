@@ -5,9 +5,9 @@ const AddForm = (props) => {
 
     return (
         <>
-            <Input defaultValue={props.itemName}
+            <Input value={props.itemName}
                    placeholder={`Write ${props.item} name here`}
-                   onChange={props.changeItemName}
+                   onChange={props.onChangeItemName}
                    style={{width: '200px'}}/>
             <Button key="1" onClick={props.addItem}>Add {props.item}</Button>
         </>

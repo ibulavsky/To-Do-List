@@ -1,7 +1,8 @@
 import {List} from "antd"
 import React from "react"
-import Wish from "./wishesList/Wish"
-import AddWishContainer from "./wishesList/WishContainer"
+import ListContainer from "./ListContainer"
+import ListHeader from "./ListHeader"
+import ListFooter from "./ListFooter"
 
 const WishesList = (props) => {
     return (
@@ -9,13 +10,13 @@ const WishesList = (props) => {
             <div style={{width: "500px"}}>
                 <h3 style={{marginBottom: 16}}>{`${props.l.id} - ${props.l.name}`}</h3>
                 <List
-                    header={<AddWishContainer listId={props.l.id}/>}
-                    footer={<div>Footer</div>}
+                    header={<ListHeader listId={props.l.id}/>}
+                    footer={<ListFooter />}
                     bordered
                     dataSource={props.l.wishes}
                     renderItem={item => (
                         <List.Item>
-                            <Wish item={item}/>
+                            <ListContainer item={item}/>
                         </List.Item>
                     )}
                 />

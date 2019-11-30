@@ -3,7 +3,7 @@ import AddForm from "../../common/AddForm"
 import {connect} from "react-redux"
 import {addWish} from "../../../bll/ListsReducer"
 
-class WishContainer extends Component {
+class ListHeader extends Component {
     state = {
         wishName: '',
     }
@@ -15,9 +15,10 @@ class WishContainer extends Component {
                 priority: 2,
                 id: Math.ceil(Math.random() * 10)
             };
-            this.props.addWish(newWish , this.props.listId)
+            this.props.addWish(newWish , this.props.listId);
+            this.setState({ wishName: ''})
         },
-        changeItemName: (e) => {
+        onChangeItemName: (e) => {
             this.setState(
                 {
                     wishName: e.currentTarget.value
@@ -34,4 +35,4 @@ class WishContainer extends Component {
     }
 }
 
-export default connect(null, {addWish})(WishContainer)
+export default connect(null, {addWish})(ListHeader)

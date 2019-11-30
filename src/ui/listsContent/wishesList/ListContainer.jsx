@@ -1,6 +1,6 @@
 import React from "react"
 
-const Wish = (props) => {
+const ListContainer = (props) => {
     return (
         <>
             <span style={{}}>
@@ -11,4 +11,4 @@ const Wish = (props) => {
     )
 }
 
-export default Wish
+export default ListContainer

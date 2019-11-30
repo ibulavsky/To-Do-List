@@ -16,9 +16,10 @@ class AddListsFormContainer extends Component {
                 wishes: [{title: 'added', priority: 2, id: 2 }],
                 id: Math.ceil(Math.random() * 10)
             }
-            this.props.addWishesList(newWishList)
+            this.props.addWishesList(newWishList);
+            this.setState({ itemName: ''})
         },
-        changeItemName: (e) => {
+        onChangeItemName: (e) => {
             this.setState(
                 {
                     itemName: e.currentTarget.value
