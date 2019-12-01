@@ -1,0 +1,28 @@
+.container {
+    width: 500px
+}
+
+.titleWrap {
+    width: 100%;
+    margin: 8px 0;
+    display: flex;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.editIcon {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.deleteIcon {
+    display: flex;
+    margin: 0 10px;
+    align-items: center;
+}

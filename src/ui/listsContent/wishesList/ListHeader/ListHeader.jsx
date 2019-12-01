@@ -1,7 +1,8 @@
 import React, {Component} from "react"
-import AddForm from "../../common/AddForm"
+import AddForm from "../../../common/AddForm"
 import {connect} from "react-redux"
-import {addWish} from "../../../bll/ListsReducer"
+import {addWish} from "../../../../bll/ListsReducer"
+import styles from './listHeader.module.css'
 
 class ListHeader extends Component {
     state = {
@@ -29,9 +30,9 @@ class ListHeader extends Component {
 
     render() {
         return (
-            <>
+            <div className={styles.listHeader}>
                 <AddForm item={'wish'} itemName={this.state.wishName} {...this.addFormCallbacks} />
-            </>)
+            </div>)
     }
 }
 

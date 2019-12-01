@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Icon, Typography} from "antd"
+import styles from './listFooter.module.css'
 
 class ListFooter extends React.Component {
 
@@ -35,7 +36,7 @@ class ListFooter extends React.Component {
         let typeForActive = this.state.filterValue === "Active" ? "primary" : "";
 
         return (
-            <div className="List-footer">
+            <div className={styles.listFooter}>
                 {!this.state.isHidden && <div>
                     <Button key="11" onClick={this.onAllFilterClick} type={typeForAll}>ALL</Button>
                     <Button key="12" onClick={this.onCompletedFilterClick} type={typeForCompleted}>Completed</Button>
@@ -46,8 +47,7 @@ class ListFooter extends React.Component {
                     <Icon type="backward"/>
                     <Typography code>hide</Typography>
                 </span>}
-                {this.state.isHidden &&
-                <span onClick={this.onHideFiltersClick}> <Icon type="forward"/>
+                {this.state.isHidden && <span onClick={this.onHideFiltersClick}> <Icon type="forward"/>
                     <Typography code>show</Typography> </span>}
             </div>
         );

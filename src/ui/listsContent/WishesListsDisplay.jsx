@@ -1,9 +1,10 @@
 import React from "react"
 import {connect} from "react-redux"
-import WishesList from "./wishesList/WishesList"
+import ListWrapper from "./wishesList/ListWrapper"
+import {deleteWishesList} from "../../bll/ListsReducer"
 
 const WishesListsDisplay = (props) => {
-    const lists = props.lists.map(l => <WishesList l={l}/>)
+    const lists = props.lists.map(l => <ListWrapper deleteWishesList={props.deleteWishesList} l={l}/>)
     return (
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
             {lists}
@@ -15,4 +16,4 @@ const mapStateToProps = (store) => ({
     lists: store.addListsForm.wishesLists
 })
 
-export default connect(mapStateToProps, null)(WishesListsDisplay)
+export default connect(mapStateToProps, {deleteWishesList})(WishesListsDisplay)
