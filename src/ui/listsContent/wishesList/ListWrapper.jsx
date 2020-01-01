@@ -24,7 +24,10 @@ const ListWrapper = (props) => {
                 <header className={styles.titleWrap}>
                     {isInputShow ? <>
                             <Input placeholder="List name" value={listTitle}
-                                   onChange={(e) => changelListTitle(e.currentTarget.value)}/>
+                                   autoFocus
+                                   onChange={(e) => changelListTitle(e.currentTarget.value)}
+                                   onPressEnter={updateList}
+                            />
                             <Icon type="check-circle" className={styles.icon} onClick={updateList}/>
                             <Icon type="undo" className={styles.icon} onClick={() => setInputShow(false)}/>
                         </>
@@ -42,7 +45,7 @@ const ListWrapper = (props) => {
                     dataSource={props.l.wishes}
                     renderItem={item => (
                         <List.Item>
-                            <ListContent item={item}/>
+                            <ListContent listId={props.l.id} item={item}/>
                         </List.Item>
                     )}
                 />

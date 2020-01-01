@@ -2,6 +2,7 @@ const ADD_WISHLIST = 'wishesListsAPP/ListsReducer/ADD_WISHLIST';
 const DELETE_WISHLIST = 'wishesListsAPP/ListsReducer/DELETE_WISHLIST';
 const UPDATE_WISHLIST = 'wishesListsAPP/ListsReducer/UPDATE_WISHLIST';
 const ADD_WISH = 'wishesListsAPP/ListsReducer/ADD_WISH';
+const DELETE_WISH = 'wishesListsAPP/ListsReducer/DELETE_WISH';
 const UPDATE_WISH = 'wishesListsAPP/ListsReducer/UPDATE_WISH';
 
 
@@ -54,25 +55,43 @@ const listsReducer = (state = initialState, action) => {
                     }
                 }),
             };
-        case UPDATE_WISH:
+
+        case DELETE_WISH:
             return {
                 ...state,
                 wishesLists: state.wishesLists.map(l => {
                     if (l.id === action.listId) {
-                        l.wishes.map(w => {
-                            if (w.id === action.wishId) {
-                                return {...w, ...action.payload}
-                            }
-                            return w
-                        })
                         return {
-                            ...l
+                            ...l, wishes: l.wishes.filter(w => {
+                                if (w.id !== action.wishId) {
+                                    return true
+                                }
+                                return false
+                            })
                         }
-                    } else {
+                    }
+                    return l
+                })
+            };
+
+        case UPDATE_WISH:
+            return {
+                ...state,
+                wishesLists: state.wishesLists.map(l => {
+                        if (l.id === action.listId) {
+                            return {
+                                ...l, wishes: l.wishes.map(w => {
+                                    if (w.id === action.wishId) {
+                                        return {...w, ...action.payload}
+                                    }
+                                    return w
+                                })
+                            }
+                        }
                         return l
                     }
-                }),
-            };
+                )
+            }
         default:
             return state;
     }
@@ -84,4 +103,5 @@ export const addWishesList = newWishesList => ({type: ADD_WISHLIST, newWishesLis
 export const deleteWishesList = wishesListId => ({type: DELETE_WISHLIST, wishesListId})
 export const updateWishesList = (wishesListId, payload) => ({type: UPDATE_WISHLIST, wishesListId, payload})
 export const addWish = (newWish, listId) => ({type: ADD_WISH, newWish, listId})
+export const deleteWish = (listId, wishId) => ({type: DELETE_WISH, listId, wishId})
 export const updateWish = (listId, wishId, payload) => ({type: UPDATE_WISH, listId, wishId, payload})
