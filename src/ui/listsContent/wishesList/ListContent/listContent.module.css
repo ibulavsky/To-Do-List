@@ -1,7 +1,27 @@
 .listContainer {
+    width: 100%;
+    /*border: 1px solid red;*/
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 167px);
+    /*border: 1px solid green;*/
+    word-wrap: break-word
+}
+
+.priority {
+    display: flex;
+    align-items: center;
 }
 
 .icon {

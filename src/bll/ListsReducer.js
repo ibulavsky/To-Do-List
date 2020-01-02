@@ -8,18 +8,18 @@ const UPDATE_WISH = 'wishesListsAPP/ListsReducer/UPDATE_WISH';
 
 let initialState = {
     wishesLists: [{
-        name: 'List',
+        name: 'ListTOP',
         id: 1,
-        wishes: [{title: 'Wish', priority: 2, status: 'complete'},]
+        wishes: [{title: 'Wish', priority: 2, status: false, id: 1}, {title: 'New', priority: 1, status: true, id: 2},]
     }],
-};
+}
 
 const listsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_WISHLIST:
             return {
                 ...state,
-                wishesLists: [...state.wishesLists, action.newWishesList],
+                wishesLists: [action.newWishesList, ...state.wishesLists],
             };
         case DELETE_WISHLIST:
             return {

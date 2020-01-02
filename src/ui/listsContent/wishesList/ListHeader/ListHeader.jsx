@@ -14,10 +14,10 @@ class ListHeader extends Component {
             const newWish = {
                 title: this.state.wishName,
                 priority: 2,
-                id: Math.ceil(Math.random() * 10)
+                id: Math.ceil(Math.random() * 100)
             };
-            this.props.addWish(newWish , this.props.listId);
-            this.setState({ wishName: ''})
+            this.props.addWish(newWish, this.props.listId);
+            this.setState({wishName: ''})
         },
         onChangeItemName: (e) => {
             this.setState(
