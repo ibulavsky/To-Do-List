@@ -1,15 +1,16 @@
 import {Button, Input} from "antd"
 import React from "react"
 
-const AddForm = (props) => {
+const AddForm = ({itemName, item, onChangeItemName, addItem}) => {
 
     return (
         <>
-            <Input value={props.itemName}
-                   placeholder={`Write ${props.item} name here`}
-                   onChange={props.onChangeItemName}
+            <Input value={itemName}
+                   placeholder={`Write ${item} name here`}
+                   onChange={onChangeItemName}
+                   onPressEnter={addItem}
                    style={{width: '200px', marginRight: '20px'}}/>
-            <Button key="1" style={{marginLeft: '8px'}} onClick={props.addItem}>Add {props.item}</Button>
+            <Button key="1" style={{marginLeft: '8px'}} onClick={addItem}>Add {item}</Button>
         </>
     )
 }

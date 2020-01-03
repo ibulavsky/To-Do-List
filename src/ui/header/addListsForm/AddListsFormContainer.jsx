@@ -1,40 +1,31 @@
-import React, {Component} from "react"
+import React, {useState} from "react"
 import AddForm from "../../common/AddForm"
-import {connect} from "react-redux"
+import {useDispatch} from "react-redux"
 import {addWishesList} from "../../../bll/ListsReducer"
 
-class AddListsFormContainer extends Component {
+const AddListsFormContainer = () => {
 
-    state = {
-        itemName: '',
-    }
+    const [itemName, changeItemName] = useState('')
+    const dispatch = useDispatch()
 
-    addFormCallbacks = {
+    const addFormCallbacks = {
         addItem: () => {
             const newWishList = {
-                name: this.state.itemName,
-                wishes: [{title: 'added', priority: 2, id: 2 }],
+                name: itemName,
+                wishes: [],
                 id: Math.ceil(Math.random() * 10)
             }
-            this.props.addWishesList(newWishList);
-            this.setState({ itemName: ''})
+            dispatch(addWishesList(newWishList));
+            changeItemName('')
         },
-        onChangeItemName: (e) => {
-            this.setState(
-                {
-                    itemName: e.currentTarget.value
-                }
-            )
-        }
+        onChangeItemName: (e) => changeItemName(e.currentTarget.value)
     }
 
-    render() {
-        return (
-            <>
-                <AddForm item={'list'} itemName={this.state.itemName} {...this.addFormCallbacks} />
-            </>
-        )
-    }
+    return (
+        <>
+            <AddForm item={'list'} itemName={itemName} {...addFormCallbacks} />
+        </>
+    )
 }
 
-export default connect(null, {addWishesList})(AddListsFormContainer)
+export default AddListsFormContainer

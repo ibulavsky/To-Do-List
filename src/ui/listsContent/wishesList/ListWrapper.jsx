@@ -1,25 +1,29 @@
-import {Button, Icon, Input, List} from "antd"
+import {Icon, Input, List} from "antd"
 import React, {useEffect, useState} from "react"
-import ListContent from "./ListContent/ListContent"
+import Wish from "./ListContent/Wish"
 import ListHeader from "./ListHeader/ListHeader"
 import ListFooter from "./ListFooter/ListFooter"
 import styles from './listWrapper.module.css'
+import {useDispatch} from "react-redux"
+import {deleteWishesList, updateWishesList} from "../../../bll/ListsReducer"
 
 const ListWrapper = (props) => {
     const [isInputShow, setInputShow] = useState(false)
     const [listTitle, changeListTitle] = useState(props.l.name)
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
-            changeListTitle(props.l.name)
+        changeListTitle(props.l.name)
     }, [props.l.name])
 
 
     const deleteList = () => {
-        props.deleteWishesList(props.l.id)
+        dispatch(deleteWishesList(props.l.id))
     }
 
     const updateList = () => {
-        props.updateWishesList(props.l.id, {name: listTitle})
+        dispatch(updateWishesList(props.l.id, {name: listTitle}))
         setInputShow(false)
     }
 
@@ -50,7 +54,7 @@ const ListWrapper = (props) => {
                     dataSource={props.l.wishes}
                     renderItem={item => (
                         <List.Item>
-                            <ListContent listId={props.l.id} item={item}/>
+                            <Wish listId={props.l.id} wishItem={item}/>
                         </List.Item>
                     )}
                 />
