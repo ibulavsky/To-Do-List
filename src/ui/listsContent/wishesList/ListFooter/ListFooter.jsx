@@ -1,57 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Icon, Typography} from "antd"
 import styles from './listFooter.module.css'
 
-class ListFooter extends React.Component {
+const ListFooter = ({filterValue, changeFilter}) => {
 
-    state = {
-        isHidden: false,
-        filterValue: "All"
-    };
+    const [isHidden, hide] = useState(false)
 
-    changeFilter = (filter) => {
-        this.setState({filterValue: filter})
+    const onAllFilterClick = () => {
+        changeFilter("All")
+    }
+    const onCompletedFilterClick = () => {
+        changeFilter("Completed")
+    }
+    const onActiveFilterClick = () => {
+        changeFilter("Active")
     }
 
-    onAllFilterClick = () => {
-        this.changeFilter("All")
+    const onShowFiltersClick = () => {
+        hide(true)
     }
-    onCompletedFilterClick = () => {
-        this.changeFilter("Completed")
-    }
-    onActiveFilterClick = () => {
-        this.changeFilter("Active")
-    }
-    onShowFiltersClick = () => {
-        this.setState({isHidden: true})
-    }
-    onHideFiltersClick = () => {
-        this.setState({isHidden: false})
+    const onHideFiltersClick = () => {
+        hide(false)
     }
 
-    render = (props) => {
 
-        let typeForAll = this.state.filterValue === "All" ? "primary" : "";
-        let typeForCompleted = this.state.filterValue === "Completed" ? "primary" : "";
-        let typeForActive = this.state.filterValue === "Active" ? "primary" : "";
+    let typeForAll = filterValue === "All" ? "primary" : "";
+    let typeForCompleted = filterValue === "Completed" ? "primary" : "";
+    let typeForActive = filterValue === "Active" ? "primary" : "";
 
-        return (
-            <div className={styles.listFooter}>
-                {!this.state.isHidden && <div>
-                    <Button key="11" onClick={this.onAllFilterClick} type={typeForAll}>ALL</Button>
-                    <Button key="12" onClick={this.onCompletedFilterClick} type={typeForCompleted}>Completed</Button>
-                    <Button key="13" onClick={this.onActiveFilterClick} type={typeForActive}>Active</Button>
-                </div>
-                }
-                {!this.state.isHidden && <span onClick={this.onShowFiltersClick}>
+    return (
+        <div className={styles.listFooter}>
+            {!isHidden && <div>
+                <Button key="11" onClick={onAllFilterClick} type={typeForAll}>ALL</Button>
+                <Button key="12" onClick={onCompletedFilterClick} type={typeForCompleted}>Completed</Button>
+                <Button key="13" onClick={onActiveFilterClick} type={typeForActive}>Active</Button>
+            </div>
+            }
+            {!isHidden && <span onClick={onShowFiltersClick}>
                     <Icon type="backward"/>
                     <Typography code>hide</Typography>
                 </span>}
-                {this.state.isHidden && <span onClick={this.onHideFiltersClick}> <Icon type="forward"/>
+            {isHidden && <span onClick={onHideFiltersClick}> <Icon type="forward"/>
                     <Typography code>show</Typography> </span>}
-            </div>
-        );
-    }
+        </div>
+    )
 }
 
 export default ListFooter

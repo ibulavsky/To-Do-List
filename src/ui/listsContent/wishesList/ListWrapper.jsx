@@ -7,23 +7,37 @@ import styles from './listWrapper.module.css'
 import {useDispatch} from "react-redux"
 import {deleteWishesList, updateWishesList} from "../../../bll/ListsReducer"
 
-const ListWrapper = (props) => {
+const ListWrapper = ({l, ...props}) => {
     const [isInputShow, setInputShow] = useState(false)
-    const [listTitle, changeListTitle] = useState(props.l.name)
+    const [listTitle, changeListTitle] = useState(l.name)
+    const [filterValue, changeFilter] = useState("All")
+
+    const wishes = l.wishes.filter(w => {
+        switch (filterValue) {
+            case "All":
+                return true;
+            case "Active":
+                return !w.status;
+            case "Completed":
+                return w.status;
+            default:
+                return true
+        }
+    })
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        changeListTitle(props.l.name)
-    }, [props.l.name])
+        changeListTitle(l.name)
+    }, [l.name])
 
 
     const deleteList = () => {
-        dispatch(deleteWishesList(props.l.id))
+        dispatch(deleteWishesList(l.id))
     }
 
     const updateList = () => {
-        dispatch(updateWishesList(props.l.id, {name: listTitle}))
+        dispatch(updateWishesList(l.id, {name: listTitle}))
         setInputShow(false)
     }
 
@@ -41,20 +55,20 @@ const ListWrapper = (props) => {
                             <Icon type="undo" className={styles.icon} onClick={() => setInputShow(false)}/>
                         </>
                         : <>
-                            <h3 className={styles.title} style={{}}>{`${props.l.id} - ${props.l.name}`}</h3>
+                            <h3 className={styles.title} style={{}}>{`${l.id} - ${l.name}`}</h3>
                             <Icon type="edit" className={styles.icon} onClick={() => setInputShow(true)}/>
                             <Icon type="delete" className={styles.icon} onClick={deleteList}/>
                         </>
                     }
                 </header>
                 <List
-                    header={<ListHeader listId={props.l.id}/>}
-                    footer={<ListFooter/>}
+                    header={<ListHeader listId={l.id}/>}
+                    footer={<ListFooter filterValue={filterValue} changeFilter={changeFilter}/>}
                     bordered
-                    dataSource={props.l.wishes}
+                    dataSource={wishes}
                     renderItem={item => (
                         <List.Item>
-                            <Wish listId={props.l.id} wishItem={item}/>
+                            <Wish listId={l.id} wishItem={item}/>
                         </List.Item>
                     )}
                 />
