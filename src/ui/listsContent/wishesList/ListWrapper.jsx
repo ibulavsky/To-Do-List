@@ -1,5 +1,5 @@
 import {Button, Icon, Input, List} from "antd"
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import ListContent from "./ListContent/ListContent"
 import ListHeader from "./ListHeader/ListHeader"
 import ListFooter from "./ListFooter/ListFooter"
@@ -7,7 +7,12 @@ import styles from './listWrapper.module.css'
 
 const ListWrapper = (props) => {
     const [isInputShow, setInputShow] = useState(false)
-    const [listTitle, changelListTitle] = useState(props.l.name)
+    const [listTitle, changeListTitle] = useState(props.l.name)
+
+    useEffect(() => {
+            changeListTitle(props.l.name)
+    }, [props.l.name])
+
 
     const deleteList = () => {
         props.deleteWishesList(props.l.id)
@@ -25,7 +30,7 @@ const ListWrapper = (props) => {
                     {isInputShow ? <>
                             <Input placeholder="List name" value={listTitle}
                                    autoFocus
-                                   onChange={(e) => changelListTitle(e.currentTarget.value)}
+                                   onChange={(e) => changeListTitle(e.currentTarget.value)}
                                    onPressEnter={updateList}
                             />
                             <Icon type="check-circle" className={styles.icon} onClick={updateList}/>

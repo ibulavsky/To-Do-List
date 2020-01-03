@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {Checkbox, Icon, Input, Select} from 'antd'
 import styles from './listContent.module.css'
 import {useDispatch} from "react-redux"
@@ -9,7 +9,11 @@ const ListContent = (props) => {
     const [isChangeModeShow, setChangeModeShow] = useState(false)
     const [wishTitle, changeWishTitle] = useState(props.item.title)
     const {Option} = Select;
-    console.log(`checked ${props.item.id} ${props.item.title} - ${props.item.priority} `)
+    // console.log(`checked ${props.item.id} ${props.item.title} - ${props.item.priority} `)
+
+    useEffect(() => {
+        changeWishTitle(props.item.title)
+    }, [props.item.title])
 
 //redux
     const dispatch = useDispatch();

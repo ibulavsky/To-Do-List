@@ -8,8 +8,8 @@ const AddForm = (props) => {
             <Input value={props.itemName}
                    placeholder={`Write ${props.item} name here`}
                    onChange={props.onChangeItemName}
-                   style={{width: '200px'}}/>
-            <Button key="1" onClick={props.addItem}>Add {props.item}</Button>
+                   style={{width: '200px', marginRight: '20px'}}/>
+            <Button key="1" style={{marginLeft: '8px'}} onClick={props.addItem}>Add {props.item}</Button>
         </>
     )
 }
