@@ -11,8 +11,15 @@ const ListWrapper = ({l, ...props}) => {
     const [isInputShow, setInputShow] = useState(false)
     const [listTitle, changeListTitle] = useState(l.name)
     const [filterValue, changeFilter] = useState("All")
+    const [myWishes, changeWishes] = useState(l.wishes)
 
-    const wishes = l.wishes.filter(w => {
+    console.log('render', myWishes, 'props: ', l.wishes)
+
+    const onChangeFilter = (filter) => {
+        changeFilter(filter)
+    }
+
+    const wishes = myWishes.filter(w => {
         switch (filterValue) {
             case "All":
                 return true;
@@ -26,11 +33,51 @@ const ListWrapper = ({l, ...props}) => {
     })
 
     const dispatch = useDispatch()
+    // component did update
+    useEffect(() => {
+        console.log('update')
+        changeWishes(l.wishes)
+    }, [l.wishes])
 
     useEffect(() => {
         changeListTitle(l.name)
     }, [l.name])
 
+    useEffect(() => {
+        saveState()
+    }, [myWishes])
+
+    // component did mount, will unmount
+    useEffect(() => {
+        console.log('restore')
+        restoreState()
+        return () => {
+            console.log('unmont')
+        }
+    }, [])
+
+
+    const saveState = () => {
+        // переводим объект в строку
+        let stateAsString = JSON.stringify(myWishes);
+        // сохраняем нашу строку в localStorage под ключом "our-state"
+        localStorage.setItem("our-state-" + l.id, stateAsString);
+        console.log('save', myWishes)
+    };
+
+    const restoreState = () => {
+        // объявляем наш стейт стартовый
+        let wishesArr = [];
+        // считываем сохранённую ранее строку из localStorage
+        let stateAsString = localStorage.getItem("our-state-" + l.id);
+        // а вдруг ещё не было ни одного сохранения?? тогда будет null.
+        // если не null, тогда превращаем строку в объект
+        if (stateAsString != null) {
+            wishesArr = JSON.parse(stateAsString);
+            // устанавливаем стейт (либо пустой, либо восстановленный) в стейт
+            changeWishes(wishesArr)
+        }
+    };
 
     const deleteList = () => {
         dispatch(deleteWishesList(l.id))
@@ -62,8 +109,8 @@ const ListWrapper = ({l, ...props}) => {
                     }
                 </header>
                 <List
-                    header={<ListHeader listId={l.id}/>}
-                    footer={<ListFooter filterValue={filterValue} changeFilter={changeFilter}/>}
+                    header={<ListHeader saveWishes={saveState} listId={l.id}/>}
+                    footer={<ListFooter filterValue={filterValue} changeFilter={onChangeFilter}/>}
                     bordered
                     dataSource={wishes}
                     renderItem={item => (

@@ -6,7 +6,7 @@ const WishesListsContainer = () => {
 
     const lists = useSelector((store) => store.lists.wishesLists)
 
-    const listsArr = lists.map(l => <ListWrapper l={l}/>)
+    const listsArr = lists.map((l, index) => <ListWrapper key={index} l={l}/>)
     return (
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
             {listsArr}
