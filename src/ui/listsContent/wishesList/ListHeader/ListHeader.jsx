@@ -14,7 +14,7 @@ class ListHeader extends Component {
             const newWish = {
                 title: this.state.wishName,
                 priority: 2,
-                id: Math.ceil(Math.random() * 100)
+                id: +new Date()
             };
             this.props.addWish(newWish, this.props.listId);
             this.setState({wishName: ''})

@@ -46,7 +46,9 @@ const Wish = ({wishItem, listId}) => {
                     : <>
                         <Checkbox className={styles.check} checked={wishItem.status}
                                   onChange={(e) => onChangeWishStatus(e)}> </Checkbox>
-                        <article className={styles.text}>{wishItem.title}</article>
+                        <article className={styles.text}>
+                            {wishItem.title}
+                        </article>
                         <Select defaultValue={wishItem.priority} style={{width: 120}} className={styles.priority}
                                 onChange={(value) => onPriorityChange(value)}>
                             <Option value={3}>High</Option>

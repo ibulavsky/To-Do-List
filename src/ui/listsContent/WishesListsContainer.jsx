@@ -10,24 +10,14 @@ const WishesListsContainer = () => {
 
     const lists = useSelector((store) => store.lists.wishesLists)
 
-    const [wishesLists, setLists] = useLocalStorage('Lists', lists);
+    const [wishesLists, setLists] = useLocalStorage('Lists', lists)
 
-    console.log(lists, wishesLists)
-    // // if restored from local storage, must be dispatched into State
-    // if (wishesLists.length > lists.length) {
-    //     console.log(wishesLists)
-    //
-    // }
-    //
     useEffect(() => {
         dispatch(restoreStateList(wishesLists))
     }, [])
 
     useEffect(() => {
-        // if (lists.length !== 0) {
-        // debugger
         setLists(lists)
-        // }
     })
 
     const listsArr = wishesLists.map((l) => {
@@ -43,4 +33,4 @@ const WishesListsContainer = () => {
     )
 }
 
-export default WishesListsContainer;
+export default WishesListsContainer

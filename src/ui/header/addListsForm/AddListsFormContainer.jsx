@@ -13,7 +13,7 @@ const AddListsFormContainer = () => {
             const newWishList = [{
                 name: itemName,
                 wishes: [],
-                id: Math.ceil(Math.random() * 10)
+                id: +new Date()
             }]
             dispatch(addWishesList(...newWishList));
             changeItemName('')

@@ -63,7 +63,7 @@ const ListWrapper = ({l, ...props}) => {
                             <Icon type="undo" className={styles.icon} onClick={() => setInputShow(false)}/>
                         </>
                         : <>
-                            <h3 className={styles.title} style={{}}>{`${l.id} - ${l.name}`}</h3>
+                            <h3 className={styles.title} style={{}}>{`${l.name}`}</h3>
                             <Icon type="edit" className={styles.icon} onClick={() => setInputShow(true)}/>
                             <Icon type="delete" className={styles.icon} onClick={deleteList}/>
                         </>
