@@ -1,4 +1,5 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import ThunkMiddleware from 'redux-thunk'
 import listsReducer from "./ListsReducer";
 
 
@@ -7,6 +8,6 @@ import listsReducer from "./ListsReducer";
 let reducers = combineReducers({
     lists: listsReducer,
 });
-
-let store = createStore(reducers);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+let store = createStore(reducers, composeEnhancers(applyMiddleware(ThunkMiddleware)));
 export default store;

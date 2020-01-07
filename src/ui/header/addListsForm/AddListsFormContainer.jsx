@@ -10,12 +10,12 @@ const AddListsFormContainer = () => {
 
     const addFormCallbacks = {
         addItem: () => {
-            const newWishList = {
+            const newWishList = [{
                 name: itemName,
                 wishes: [],
                 id: Math.ceil(Math.random() * 10)
-            }
-            dispatch(addWishesList(newWishList));
+            }]
+            dispatch(addWishesList(...newWishList));
             changeItemName('')
         },
         onChangeItemName: (e) => changeItemName(e.currentTarget.value)

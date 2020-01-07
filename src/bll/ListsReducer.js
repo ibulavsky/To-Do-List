@@ -1,3 +1,4 @@
+const RESTORE_STATE = 'wishesListsAPP/ListsReducer/RESTORE_STATE';
 const ADD_WISHLIST = 'wishesListsAPP/ListsReducer/ADD_WISHLIST';
 const DELETE_WISHLIST = 'wishesListsAPP/ListsReducer/DELETE_WISHLIST';
 const UPDATE_WISHLIST = 'wishesListsAPP/ListsReducer/UPDATE_WISHLIST';
@@ -8,17 +9,22 @@ const UPDATE_WISH = 'wishesListsAPP/ListsReducer/UPDATE_WISH';
 
 let initialState = {
     wishesLists: [
-    //     {
-    //     name: 'ListTOP',
-    //     id: 1,
-    //     wishes: [{title: 'Wish', priority: 2, status: false, id: 1}
-    //     ]
-    // }
+        //     {
+        //     name: 'ListTOP',
+        //     id: 1,
+        //     wishes: [{title: 'Wish', priority: 2, status: false, id: 1}
+        //     ]
+        // }
     ],
 }
 
 const listsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case RESTORE_STATE:
+            return {
+                ...state,
+                wishesLists: [...action.restoredWishesList, ...state.wishesLists],
+            };
         case ADD_WISHLIST:
             return {
                 ...state,
@@ -58,7 +64,6 @@ const listsReducer = (state = initialState, action) => {
                     }
                 }),
             };
-
         case DELETE_WISH:
             return {
                 ...state,
@@ -76,7 +81,6 @@ const listsReducer = (state = initialState, action) => {
                     return l
                 })
             };
-
         case UPDATE_WISH:
             return {
                 ...state,
@@ -102,6 +106,7 @@ const listsReducer = (state = initialState, action) => {
 
 export default listsReducer
 
+export const restoreStateList = restoredWishesList => ({type: RESTORE_STATE, restoredWishesList})
 export const addWishesList = newWishesList => ({type: ADD_WISHLIST, newWishesList})
 export const deleteWishesList = wishesListId => ({type: DELETE_WISHLIST, wishesListId})
 export const updateWishesList = (wishesListId, payload) => ({type: UPDATE_WISHLIST, wishesListId, payload})
