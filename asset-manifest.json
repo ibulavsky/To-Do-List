@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/ibulavsky.github.io/wishes-lists/static/css/main.8ec7eafe.chunk.css",
+    "main.js": "/ibulavsky.github.io/wishes-lists/static/js/main.6d4edb87.chunk.js",
+    "main.js.map": "/ibulavsky.github.io/wishes-lists/static/js/main.6d4edb87.chunk.js.map",
+    "runtime-main.js": "/ibulavsky.github.io/wishes-lists/static/js/runtime-main.43ed8b6f.js",
+    "runtime-main.js.map": "/ibulavsky.github.io/wishes-lists/static/js/runtime-main.43ed8b6f.js.map",
+    "static/css/2.fb9ed26a.chunk.css": "/ibulavsky.github.io/wishes-lists/static/css/2.fb9ed26a.chunk.css",
+    "static/js/2.ddb58e53.chunk.js": "/ibulavsky.github.io/wishes-lists/static/js/2.ddb58e53.chunk.js",
+    "static/js/2.ddb58e53.chunk.js.map": "/ibulavsky.github.io/wishes-lists/static/js/2.ddb58e53.chunk.js.map",
+    "index.html": "/ibulavsky.github.io/wishes-lists/index.html",
+    "precache-manifest.318731d897e1b3d28c44a8d2dff3bc25.js": "/ibulavsky.github.io/wishes-lists/precache-manifest.318731d897e1b3d28c44a8d2dff3bc25.js",
+    "service-worker.js": "/ibulavsky.github.io/wishes-lists/service-worker.js",
+    "static/css/2.fb9ed26a.chunk.css.map": "/ibulavsky.github.io/wishes-lists/static/css/2.fb9ed26a.chunk.css.map",
+    "static/css/main.8ec7eafe.chunk.css.map": "/ibulavsky.github.io/wishes-lists/static/css/main.8ec7eafe.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43ed8b6f.js",
+    "static/css/2.fb9ed26a.chunk.css",
+    "static/js/2.ddb58e53.chunk.js",
+    "static/css/main.8ec7eafe.chunk.css",
+    "static/js/main.6d4edb87.chunk.js"
+  ]
+}
