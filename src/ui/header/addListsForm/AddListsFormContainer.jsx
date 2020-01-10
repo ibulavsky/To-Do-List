@@ -2,27 +2,47 @@ import React, {useState} from "react"
 import AddForm from "../../common/AddForm"
 import {useDispatch} from "react-redux"
 import {addWishesList} from "../../../bll/ListsReducer"
+import {validateItem} from "../../common/validateForm"
+import {Alert} from "antd"
 
 const AddListsFormContainer = () => {
 
     const [itemName, changeItemName] = useState('')
+    const [errorMessage, setError] = useState(null)
     const dispatch = useDispatch()
 
     const addFormCallbacks = {
         addItem: () => {
-            const newWishList = [{
-                name: itemName,
-                wishes: [],
-                id: +new Date()
-            }]
-            dispatch(addWishesList(...newWishList));
-            changeItemName('')
+            if (validateItem(itemName)) {
+                setError(validateItem(itemName))
+            } else {
+                const newWishList = [{
+                    name: itemName,
+                    wishes: [],
+                    id: +new Date()
+                }]
+                dispatch(addWishesList(...newWishList)
+                )
+                changeItemName('')
+            }
         },
-        onChangeItemName: (e) => changeItemName(e.currentTarget.value)
+        onChangeItemName: (e) => {
+            setError(null)
+            changeItemName(e.currentTarget.value)
+        }
     }
+
 
     return (
         <>
+            {errorMessage && <Alert
+                message={null}
+                style={{width: '307px', margin: '8px 0 8px 8px'}}
+                description={errorMessage}
+                type="warning"
+                closable
+                showIcon
+            />}
             <AddForm item={'list'} itemName={itemName} {...addFormCallbacks} />
         </>
     )

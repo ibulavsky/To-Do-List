@@ -1,4 +1,4 @@
-import {Icon, Input, List} from "antd"
+import {Button, Icon, Input, List, Popconfirm} from "antd"
 import React, {useEffect, useState} from "react"
 import Wish from "./ListContent/Wish"
 import ListHeader from "./ListHeader/ListHeader"
@@ -12,6 +12,8 @@ const ListWrapper = ({l, ...props}) => {
     const [listTitle, changeListTitle] = useState(l.name)
     const [filterValue, changeFilter] = useState("All")
     const [myWishes, changeWishes] = useState(l.wishes)
+
+    const text = 'Are you sure to delete this list?'
 
     const onChangeFilter = (filter) => {
         changeFilter(filter)
@@ -65,7 +67,11 @@ const ListWrapper = ({l, ...props}) => {
                         : <>
                             <h3 className={styles.title} style={{}}>{`${l.name}`}</h3>
                             <Icon type="edit" className={styles.icon} onClick={() => setInputShow(true)}/>
-                            <Icon type="delete" className={styles.icon} onClick={deleteList}/>
+                            <Popconfirm placement="right" title={text} onConfirm={deleteList} okText="Yes"
+                                        cancelText="No">
+                                <Icon type="delete" className={styles.icon}/>
+                            </Popconfirm>
+
                         </>
                     }
                 </header>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import {Checkbox, Icon, Input, Select} from 'antd'
+import {Button, Checkbox, Icon, Input, Popconfirm, Select} from 'antd'
 import styles from './Wish.module.css'
 import {useDispatch} from "react-redux"
 import {deleteWish, updateWish} from "../../../../bll/ListsReducer"
@@ -10,6 +10,8 @@ const Wish = ({wishItem, listId}) => {
     const [wishTitle, changeWishTitle] = useState(wishItem.title)
     const {Option} = Select;
     // console.log(`checked ${props.item.id} ${props.item.title} - ${props.item.priority} `)
+
+    const text = 'Are you sure to delete this wish?'
 
     useEffect(() => {
         changeWishTitle(wishItem.title)
@@ -56,7 +58,10 @@ const Wish = ({wishItem, listId}) => {
                             <Option value={1}>Low</Option>
                         </Select>
                         <Icon type="edit" className={styles.icon} onClick={() => setChangeModeShow(true)}/>
-                        <Icon type="delete" className={styles.icon} onClick={onDeleteWish}/>
+                        <Popconfirm placement="right" title={text} onConfirm={onDeleteWish} okText="Yes"
+                                    cancelText="No">
+                            <Icon type="delete" className={styles.icon}/>
+                        </Popconfirm>
                     </>
                 }
                 </>

@@ -1,39 +1,53 @@
-import React, {Component} from "react"
+import React, {useState} from "react"
 import AddForm from "../../../common/AddForm"
-import {connect} from "react-redux"
+import {useDispatch} from "react-redux"
 import {addWish} from "../../../../bll/ListsReducer"
 import styles from './listHeader.module.css'
+import {Alert} from "antd"
+import {validateItem} from "../../../common/validateForm"
 
-class ListHeader extends Component {
-    state = {
-        wishName: '',
-    }
+const ListHeader = (props) => {
+    const [errorMessage, setError] = useState(null)
+    const [wishName, changeWish] = useState('')
 
-    addFormCallbacks = {
+    const dispatch = useDispatch()
+
+    const addFormCallbacks = {
         addItem: () => {
-            const newWish = {
-                title: this.state.wishName,
-                priority: 2,
-                id: +new Date()
-            };
-            this.props.addWish(newWish, this.props.listId);
-            this.setState({wishName: ''})
+            if (validateItem(wishName)) {
+                setError(validateItem(wishName))
+            } else {
+                const newWish = {
+                    title: wishName,
+                    priority: 2,
+                    id: +new Date()
+                };
+                dispatch(addWish(newWish, props.listId));
+                changeWish('')
+            }
         },
         onChangeItemName: (e) => {
-            this.setState(
-                {
-                    wishName: e.currentTarget.value
-                }
-            )
+            setError(null)
+            changeWish(e.currentTarget.value)
         }
     }
 
-    render() {
-        return (
+    return (
+        <>
+            {errorMessage && <Alert
+                message={null}
+                style={{width: '307px', margin: '8px 0 8px 8px'}}
+                description={errorMessage}
+                type="warning"
+                closable
+                showIcon
+            />
+            }
             <div className={styles.listHeader}>
-                <AddForm item={'wish'} itemName={this.state.wishName} {...this.addFormCallbacks} />
-            </div>)
-    }
+                <AddForm item={'wish'} itemName={wishName} {...addFormCallbacks} />
+            </div>
+        </>
+    )
 }
 
-export default connect(null, {addWish})(ListHeader)
+export default ListHeader
