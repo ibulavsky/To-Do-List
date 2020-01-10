@@ -3,7 +3,15 @@
     /*border: 1px solid red;*/
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
     justify-content: space-between;
+}
+.inputContainer {
+    width: 100%;
+    /*border: 1px solid red;*/
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-between;*/
 }
 
 .check {
@@ -28,5 +36,5 @@
 .icon {
     display: flex;
     align-items: center;
-    margin: 0 10px;
+    margin: 9px 10px;
 }
