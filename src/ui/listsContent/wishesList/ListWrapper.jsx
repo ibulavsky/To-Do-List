@@ -7,13 +7,13 @@ import styles from './listWrapper.module.css'
 import {useDispatch} from "react-redux"
 import {deleteWishesList, updateWishesList} from "../../../bll/ListsReducer"
 import {validateItem} from "../../common/validateForm"
+import InputForm from "../../common/InputForm"
 
 const ListWrapper = ({l, ...props}) => {
     const [isInputShow, setInputShow] = useState(false)
     const [listTitle, changeListTitle] = useState(l.name)
     const [filterValue, changeFilter] = useState("All")
     const [myWishes, changeWishes] = useState(l.wishes)
-    const [errorMessage, setError] = useState(null)
 
     const text = 'Are you sure to delete this list?'
 
@@ -48,13 +48,9 @@ const ListWrapper = ({l, ...props}) => {
         dispatch(deleteWishesList(l.id))
     }
 
-    const updateList = () => {
-        if (validateItem(listTitle)) {
-            setError(validateItem(listTitle))
-        } else {
-            dispatch(updateWishesList(l.id, {name: listTitle}))
-            setInputShow(false)
-        }
+    const updateList = (itemTitle) => {
+        dispatch(updateWishesList(l.id, {name: itemTitle}))
+        setInputShow(false)
     }
 
     return (
@@ -62,30 +58,10 @@ const ListWrapper = ({l, ...props}) => {
             <div className={styles.container}>
                 <header className={styles.titleWrap}>
                     {isInputShow ? <>
-                        <span className={styles.inputContainer}>
-                            {errorMessage &&
-                            <Alert
-                                message={null}
-                                style={{width: '100%', marginBottom: '8px'}}
-                                description={errorMessage}
-                                type="warning"
-                                closable
-                                showIcon
-                            />}
-                            <Input placeholder="List name" value={listTitle}
-                                   autoFocus
-                                   onChange={(e) => {
-                                       setError(null)
-                                       changeListTitle(e.currentTarget.value)
-                                   }}
-                                   onPressEnter={updateList}
-                            />
-                        </span>
-                            <Icon type="check-circle" className={styles.icon} onClick={updateList}/>
-                            <Icon type="undo" className={styles.icon} onClick={() => {
-                                setError(null)
-                                setInputShow(false)
-                            }}/>
+                            <InputForm itemTitle={listTitle} changeItemTitle={changeListTitle} addItem={updateList}
+                                       undo={() => {
+                                           setInputShow(false)
+                                       }}/>
                         </>
                         : <>
                             <h3 className={styles.title} style={{}}>{`${l.name}`}</h3>

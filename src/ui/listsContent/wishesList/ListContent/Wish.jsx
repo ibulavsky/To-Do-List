@@ -4,14 +4,13 @@ import styles from './Wish.module.css'
 import {useDispatch} from "react-redux"
 import {deleteWish, updateWish} from "../../../../bll/ListsReducer"
 import {validateItem} from "../../../common/validateForm"
+import InputForm from "../../../common/InputForm"
 
 const Wish = ({wishItem, listId}) => {
 
     const [isChangeModeShow, setChangeModeShow] = useState(false)
     const [wishTitle, changeWishTitle] = useState(wishItem.title)
-    const [errorMessage, setError] = useState(null)
     const {Option} = Select;
-    // console.log(`checked ${props.item.id} ${props.item.title} - ${props.item.priority} `)
 
     const text = 'Are you sure to delete this wish?'
 
@@ -26,13 +25,9 @@ const Wish = ({wishItem, listId}) => {
         dispatch(updateWish(listId, wishItem.id, {priority: value}))
         console.log(`priority selected ${value} - id ${wishItem.id}`);
     }
-    const onUpdateWish = () => {
-        if (validateItem(wishTitle)) {
-            setError(validateItem(wishTitle))
-        } else {
-            dispatch(updateWish(listId, wishItem.id, {title: wishTitle}))
-            setChangeModeShow(false)
-        }
+    const onUpdateWish = (wishTitle) => {
+        dispatch(updateWish(listId, wishItem.id, {title: wishTitle}))
+        setChangeModeShow(false)
     }
     const onDeleteWish = () => dispatch(deleteWish(listId, wishItem.id))
     const onChangeWishStatus = (e) => {
@@ -43,30 +38,9 @@ const Wish = ({wishItem, listId}) => {
         <>
             <span className={styles.listContainer}>
                                {isChangeModeShow ? <>
-                     <span className={styles.inputContainer}>
-                        {errorMessage &&
-                        <Alert
-                            message={null}
-                            style={{width: '100%', marginBottom: '8px'}}
-                            description={errorMessage}
-                            type="warning"
-                            closable
-                            showIcon
-                        />
-                        }
-                         <Input placeholder="Wish name" value={wishTitle}
-                                autoFocus
-                                onChange={(e) => {
-                                    setError(null)
-                                    changeWishTitle(e.currentTarget.value)
-                                }}
-                                onPressEnter={onUpdateWish}/>
-                            </span>
-                                       <Icon type="check-circle" className={styles.icon} onClick={onUpdateWish}/>
-                                       <Icon type="undo" className={styles.icon} onClick={() => {
-                                           setError(null)
-                                           setChangeModeShow(false)
-                                       }}/>
+                                       <InputForm itemTitle={wishTitle} changeItemTitle={changeWishTitle}
+                                                  addItem={onUpdateWish}
+                                                  undo={() => setChangeModeShow(false)}/>
                                    </>
                                    : <>
                                        <Checkbox className={styles.check} checked={wishItem.status}

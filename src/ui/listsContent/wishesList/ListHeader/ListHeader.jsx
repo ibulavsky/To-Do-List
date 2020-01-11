@@ -32,6 +32,10 @@ const ListHeader = (props) => {
         }
     }
 
+    const onClose = () => {
+        setError(null)
+    }
+
     return (
         <>
             {errorMessage && <Alert
@@ -40,6 +44,7 @@ const ListHeader = (props) => {
                 description={errorMessage}
                 type="warning"
                 closable
+                onClose={onClose}
                 showIcon
             />
             }

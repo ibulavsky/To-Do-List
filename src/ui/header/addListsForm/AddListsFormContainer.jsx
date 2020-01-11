@@ -32,6 +32,9 @@ const AddListsFormContainer = () => {
         }
     }
 
+    const onClose = () => {
+        setError(null)
+    }
 
     return (
         <>
@@ -41,6 +44,7 @@ const AddListsFormContainer = () => {
                 description={errorMessage}
                 type="warning"
                 closable
+                onClose={onClose}
                 showIcon
             />}
             <AddForm item={'list'} itemName={itemName} {...addFormCallbacks} />
